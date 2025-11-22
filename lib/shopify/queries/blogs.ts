@@ -1,7 +1,8 @@
 import { shopifyFetch } from "@/lib/shopify/client";
+import { Blog } from "@/lib/shopify/types";
 
 // Fetch all blogs and their articles
-export async function getAllBlogs() {
+export async function getAllBlogs(): Promise<Blog[]> {
   const query = `
     {
       blogs(first: 50) {
@@ -34,8 +35,10 @@ export async function getAllBlogs() {
   return data.blogs.edges.map((b: any) => b.node);
 }
 
+import { Article } from "@/lib/shopify/types";
+
 // Fetch a single article by blogHandle and articleHandle
-export async function getArticleByHandle(blogHandle: string, articleHandle: string) {
+export async function getArticleByHandle(blogHandle: string, articleHandle: string): Promise<Article | null> {
   const query = `
     {
       blogByHandle(handle: "${blogHandle}") {

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllBlogs } from "@/lib/shopify/queries/blogs";
+import { Blog } from "@/lib/shopify/types";
 
 export default async function BlogsPage() {
-  const blogs = await getAllBlogs();
+  const blogs: Blog[] = await getAllBlogs();
 
   // Flatten all articles
-  const articles = blogs.flatMap(blog =>
-    blog.articles.edges.map((a: any) => ({
+  const articles = blogs.flatMap((blog: Blog) =>
+    blog.articles.edges.map((a: { node: any }) => ({
       ...a.node,
       blogHandle: blog.handle
     }))

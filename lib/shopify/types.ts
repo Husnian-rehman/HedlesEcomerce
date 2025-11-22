@@ -86,3 +86,26 @@ export interface Media {
 export interface Tag {
   value: string;
 }
+
+export interface Article {
+  id: string;
+  title: string;
+  handle: string;
+  excerpt: string;
+  publishedAt: string;
+  image?: {
+    src: string;
+    altText?: string;
+  };
+}
+
+export interface Blog {
+  id: string;
+  handle: string;
+  title: string;
+  articles: {
+    edges: {
+      node: Article;
+    }[];
+  };
+}
